@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with sparring statistics and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "totalSpars": { "type": "number" },
+        "preferredPersona": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "SparSession": {
+      "title": "SparSession",
+      "description": "A cognitive sparring conversation session",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "personaId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "messageCount": { "type": "number" },
+        "frictionScoreAvg": { "type": "number" }
+      },
+      "required": ["sessionId", "userId", "createdAt"]
+    },
+    "SparMessage": {
+      "title": "SparMessage",
+      "description": "An individual sparring message in a session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sessionId": { "type": "string" },
+        "userId": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "sessionId", "userId", "role", "text"]
+    },
+    "CodeSnippet": {
+      "title": "CodeSnippet",
+      "description": "A saved code file or IDE snippet",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "language": { "type": "string", "enum": ["html", "jsx", "tsx"] },
+        "code": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "language", "code"]
+    },
+    "CustomPersona": {
+      "title": "CustomPersona",
+      "description": "User-created AI sparring persona configuration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "badge": { "type": "string" },
+        "voice": { "type": "string" },
+        "systemPrompt": { "type": "string" },
+        "frictionLevel": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "systemPrompt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user account profile information"
+    },
+    "/sessions/{sessionId}": {
+      "schema": "SparSession",
+      "description": "Stores high-level session metadata"
+    },
+    "/sessions/{sessionId}/messages/{messageId}": {
+      "schema": "SparMessage",
+      "description": "Stores subcollection of messages for a session"
+    },
+    "/snippets/{snippetId}": {
+      "schema": "CodeSnippet",
+      "description": "Stores user saved IDE code projects and snippets"
+    },
+    "/personas/{personaId}": {
+      "schema": "CustomPersona",
+      "description": "Stores user created custom persona configurations"
+    }
+  }
+}

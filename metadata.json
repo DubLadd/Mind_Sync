@@ -1,0 +1,6 @@
+{
+  "name": "Neural Sparring Mirror - AI Voice & Chat Agent",
+  "description": "High-friction conversational sparring partner, real-time Web Audio spectrum visualizer, neural voice synthesis, code auditor, and structured argument telemetry powered by Gemini.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

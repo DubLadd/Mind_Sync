@@ -1,0 +1,10 @@
+{
+  "usr_1790730193347_0d7d4868": {
+    "id": "usr_1790730193347_0d7d4868",
+    "email": "test@example.com",
+    "name": "Sparring User",
+    "passwordHash": "d0775723608cec065a90269ca63d27cc0ce7625861a44fe96a8282950083b652bad25b2330f2183ca25e68a2dda2d6331dfd29b75b3415e313a3e46fd6d8b523",
+    "salt": "44dba016332c9c1cb8494d092a6dfcd4",
+    "createdAt": "2026-09-30T01:03:13.429Z"
+  }
+}

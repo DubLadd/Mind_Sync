@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100 dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        // Suppress expected Vite HMR WebSocket disconnects in iframe container environments
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = event && event.reason;
+          var msg = (reason && (reason.message || reason.description || String(reason))) || '';
+          if (msg.indexOf('WebSocket') !== -1 || msg.indexOf('websocket') !== -1) {
+            event.preventDefault();
+          }
+        });
+
+        try {
+          var originalFetch = typeof window !== 'undefined' && window.fetch ? window.fetch.bind(window) : null;
+          var _fetch = originalFetch;
+          try {
+            Object.defineProperty(window, 'fetch', {
+              get: function() { return _fetch; },
+              set: function(fn) { _fetch = fn; },
+              configurable: true,
+              enumerable: true
+            });
+          } catch (e1) {
+            try {
+              if (typeof Window !== 'undefined' && Window.prototype) {
+                Object.defineProperty(Window.prototype, 'fetch', {
+                  get: function() { return _fetch; },
+                  set: function(fn) { _fetch = fn; },
+                  configurable: true,
+                  enumerable: true
+                });
+              }
+            } catch (e2) {}
+          }
+        } catch (err) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neural Sparring Mirror - AI Voice & Chat Agent</title>
+    <meta name="description" content="High-friction conversational sparring partner, real-time Web Audio spectrum visualizer, neural voice synthesis, code auditor, and structured argument telemetry powered by Gemini." />
+    <meta property="og:title" content="Neural Sparring Mirror - AI Voice & Chat Agent" />
+    <meta property="og:description" content="High-friction conversational sparring partner, real-time Web Audio spectrum visualizer, neural voice synthesis, code auditor, and structured argument telemetry powered by Gemini." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="h-full bg-slate-950 text-slate-100 font-sans antialiased overflow-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div id="root" class="h-full"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
